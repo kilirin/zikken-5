@@ -1,0 +1,445 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.a{
+    font-size: 170px;
+    color: #fff;
+    padding-top: 40%;
+}
+@media screen and (max-width:768px) { 
+	.a{
+    width: 100%;
+		padding-top: 500px;
+	}
+}
+#box1{
+    position: relative;
+    background: center;
+    background: bottom;
+    height: 300px; /* 画面の高さに合わせる */
+	overflow: hidden;
+    background-image: url(./img/music-598176.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+}
+#box2{
+  background-color:   rgb(222, 218, 215);
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column; /* カラム方向に配置 */
+  justify-content: space-between; /* 上下にスペースを均等に分配 */
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+#box3{
+    background-color: rgb(222, 218, 215);;
+}
+#box4{
+    background-color: rgb(222, 218, 215);;
+}
+.pagination {
+    position:fixed;
+    right:20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size:1.5em;
+    z-index: 10;
+    list-style: none;
+}
+
+.pagination a {
+    display:block;
+    height:20px;
+    margin-bottom:5px;
+    color:#fff;
+    position:relative;
+    padding:4px;
+}
+
+.pagination a.active:after {
+    box-shadow:inset 0 0 0 5px;
+}
+
+/*現在地表示のテキストの設定*/
+.pagination a .hover-text {
+    position:absolute;
+    right:15px;
+    top:0;
+    opacity:0;
+    -webkit-transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
+    padding-right: 15px;
+}
+
+.pagination a:hover .hover-text {
+    opacity: 1;
+}
+
+.pagination a:after {
+    -webkit-transition:box-shadow 0.5s ease;
+    transition:box-shadow 0.5s ease;
+    width:10px;
+    height:10px;
+    display: block;
+    border:1px solid;
+    border-radius:50%;
+    content:"";
+    position: absolute;
+    margin:auto;
+    top:0;
+    right:3px;
+    bottom:0;
+}
+
+/*768px以下は現在地表示のテキストを非表示*/
+@media screen and (max-width:768px) { 
+    .pagination a .hover-text{
+        display: none;
+    }   
+}
+
+.logo{
+    position: -webkit-sticky;/*Safari*/
+    position: sticky;
+    /*固定したい位置*/
+    top: 100px;
+    /*ナビゲーションの形状*/
+    background:#fff;
+    border: 1px solid #eee;
+    box-shadow:0 0 5px #ddd;
+    padding: 20px;
+}
+#g-nav{
+    /*position:fixed;にし、z-indexの数値を大きくして前面へ*/
+    position:fixed;
+    z-index: 998;
+    /*ナビのスタート位置と形状*/
+    top:0;
+    right: -120%;
+    width:30%;
+    height: 100vh;/*ナビの高さ*/
+    background:#999;
+    /*動き*/
+    transition: all 0.6s;
+}
+
+/*アクティブクラスがついたら位置を0に*/
+#g-nav.panelactive{
+    right: 0;
+}
+
+/*ナビゲーションの縦スクロール*/
+#g-nav.panelactive #g-nav-list{
+    /*ナビの数が増えた場合縦スクロール*/
+    position: fixed;
+    z-index: 998; 
+    width: 100%;
+    height: 100vh;/*表示する高さ*/
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/*ナビゲーション*/
+#g-nav ul {
+    /*ナビゲーション天地中央揃え*/
+    position: absolute;
+    z-index: 99;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+/*リストのレイアウト設定*/
+
+#g-nav li{
+    list-style: none;
+    text-align: center;
+}
+
+#g-nav li a{
+    color: #333;
+    text-decoration: none;
+    padding:10px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+}
+
+/*========= ボタンのためのCSS ===============*/
+.openbtn{
+  position:fixed;
+  z-index: 100;/*ボタンを最前面に*/
+  top:10px;
+  right: 10px;
+  cursor: pointer;
+  width: 150px;
+  height:150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+  background: transparent url('img/logo2.png');
+  background-size: 100%;
+}
+.openbtn:hover img{
+  animation: popup 0.2s cubic-bezier(0.22, 1, 0.36, 1) 1 forwards;
+}
+@keyframes popup {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: translateY(-3px) scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* タブレットサイズ以下の場合のみメニューバーを100%にする */
+@media screen and (max-width: 768px) {
+    .serif-nav.panelactive {
+      right: 0;
+      width: 100%;
+    }
+    .openbtn.active span:nth-of-type(1),
+    .openbtn.active span:nth-of-type(3) {
+      display: none; /* タブレット以下の場合、中央の線は非表示に */
+    }
+    .openbtn.active span:nth-of-type(2) {
+      top: 30px;
+      left: 18px;
+      transform: translateY(-6px) rotate(45deg);
+      width: 30%;
+    }
+  }
+  
+  /* スマホサイズ以下の場合のみ画像を流れるように */
+  @media screen and (max-width: 760px) {
+  .serif-nav.panelactive .logo img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+  }
+  .openbtn{
+    position:fixed;
+    z-index: 100;/*ボタンを最前面に*/
+    top:10px;
+    right: 10px;
+    cursor: pointer;
+    width: 100px;
+    height:100px;
+  }
+  #g-nav{
+    /*position:fixed;にし、z-indexの数値を大きくして前面へ*/
+    position:fixed;
+    z-index: 998;
+    /*ナビのスタート位置と形状*/
+    top:0;
+    right: -120%;
+    width:100%;
+    height: 100vh;/*ナビの高さ*/
+    background:#999;
+    /*動き*/
+    transition: all 0.6s;
+}
+
+}
+
+
+
+
+/*========= レイアウトのためのCSS ===============*/
+
+#container{
+    width:100%;
+    height: 100vh;
+    background: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+@media screen and (max-width: 768px) {
+  img{
+    max-width: 100%;
+  }
+}
+a{
+    color: #333;
+}
+
+a:hover{
+     text-decoration: none;   
+}
+.serif-nav{
+    /*position:fixed;にし、z-indexの数値を大きくして前面へ*/
+    position:fixed;
+    z-index: 9;
+    /*ナビのスタート位置と形状*/
+    top:35%;
+    right: -120%;
+    width:30%;
+    height: 15vh;/*ナビの高さ*/
+    background:white;
+    /*動き*/
+    transition: all 0.6s;
+}
+
+/*アクティブクラスがついたら位置を0に*/
+.serif-nav.panelactive{
+    right: 0;
+}
+.serif-nav{
+    list-style: none;
+    text-align: center;
+    color: #333;
+    text-decoration: none;
+    padding:10px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+}
+.serif-nav p{
+  padding:10px;
+  display: block;
+  letter-spacing: 0.1em;
+  list-style: none;
+  text-align: center;
+}
+.serif-btn{
+    z-index: 998;
+    position:fixed;
+    top:0px;
+    right: 150px;
+    cursor: pointer;
+    width: 100px;
+    height:100px;
+}
+@media screen and (max-width: 480px) {
+  .serif-btn{
+    right: 110px;
+  }
+}
+.serif-btn:hover img{
+  animation: .5s boing-anim linear;
+}
+
+
+@keyframes boing-anim{
+  10% { transform: scale(1.1, 0.9); } /*少し縮む*/
+  30% { transform: scale(0.85, 1.15); } /*反動で縦長*/
+  60%{ transform: scale(1.1, 0.9); } /*また反動で縮む*/
+  70% { transform: scale(0.95, 1.08); } /*反動が小さく*/
+  90%{ transform: scale(0.98, 1.02); } /*最後の震え*/
+  100% { transform: scale(1,1); } /*元に戻る*/
+}
+/* Loading背景画面設定　*/
+
+#splash {
+  /*fixedで全面に固定*/
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background:#333;
+    text-align:center;
+    color:#fff;
+  }
+  
+  /* Loading画像中央配置　*/
+  #splash_logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Loading アイコンの大きさ設定　*/
+  #splash_logo img {
+    width:260px;
+  }
+  
+  /* fadeUpをするアイコンの動き */
+  .fadeUp{
+  animation-name: fadeUpAnime;
+  animation-duration:0.5s;
+  animation-fill-mode:forwards;
+  opacity: 0;
+  }
+  
+  @keyframes fadeUpAnime{
+    from {
+      opacity: 0;
+    transform: translateY(100px);
+    }
+  
+    to {
+      opacity: 1;
+    transform: translateY(0);
+    }
+  }
+/*========= ローディングレイアウトのためのCSS ===============*/
+
+
+#container{
+    width:100%;
+    height: 100vh;
+    background: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+a{
+    color: #333;
+}
+
+a:hover{
+     text-decoration: none;   
+}
+/* Loading画像中央配置　*/
+#splash_logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Loading アイコンの大きさ設定　*/
+#splash_logo img {
+  width:260px;
+}
+
+/* fadeUpをするアイコンの動き */
+
+.fadeUp{
+animation-name: fadeUpAnime;
+animation-duration:0.5s;
+animation-fill-mode:forwards;
+opacity: 0;
+}
+
+@keyframes fadeUpAnime{
+  from {
+    opacity: 0;
+  transform: translateY(100px);
+  }
+
+  to {
+    opacity: 1;
+  transform: translateY(0);
+  }
+}
